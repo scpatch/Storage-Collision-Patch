@@ -1,0 +1,45 @@
+1215: PUSH8 0xFFFFFFFFFFFFFFFF
+1224: DUP1                       // Duplicate the 0F...F(mask)
+1225: PUSH1 0x40                 // Push the memory pointer (0x40 is the free memory pointer in Solidity)
+1227: MLOAD                      // Load memory content at 0x40 (free memory pointer)
+1228: PUSH1 0x24                 // Push the offset 0x24 (36 bytes)
+1230: ADD                        // Add the offset to the loaded memory pointer
+1231: MSTORE                     // Store the value (mask) as the second argument
+1232: DUP3                       // Duplicate the 2^64 (the shift size)
+1233: PUSH1 0x40                 // Push the memory pointer again
+1235: MLOAD                      // Load the free memory pointer value
+1236: PUSH1 0x44                 // Push the offset 0x44 (68 bytes)
+1238: ADD                        // Add the offset to the loaded memory pointer
+1239: MSTORE                     // Store the 2^64 value as the third argument
+1240: PUSH4 0x56b10083             // Push a 4-byte function selector (0x56b10083)
+1245: PUSH1 0xE0                 // Push 0xE0 (used for shifting to create a method ID)
+1247: SHL                        // Shift the function selector left by 0xE0 (224 bits)
+1248: PUSH1 0x40                 // Push the memory pointer
+1250: MLOAD                      // Load the free memory pointer
+1251: MSTORE                     // Store the shifted function selector getStoreValue(uint256 slot, bytes32 //offset, bytes32 data)
+
+1252: AND                        
+1253: MUL                        
+1254: OR                    
+1255: SWAP1
+1256: DUP1                       // Duplicate the SSTORE slot as arguments passed to checker
+1257: PUSH1 0x40                 // Push the memory pointer again
+1259: MLOAD                      // Load the free memory pointer
+1260: PUSH1 0x4                  // Push an offset of 4 bytes
+1262: ADD                        // Increment the memory pointer by 4, reserve for function selector
+1263: MSTORE                     // Store the current top of the stack at the incremented pointer
+1264: PUSH1 0x0                  // Return value size
+1266: PUSH1 0x0                  // Return value offset
+1268: PUSH1 0x64                 // Argument size
+1280: PUSH1 0x40                 // Push the memory pointer
+1272: MLOAD                      // Push the memory pointer content as argument offset
+1273: PUSH1 0x0           	   // Push the value (0 wei)
+1275: PUSH20 0xfebAF51A40DBbAe5ff36a1032AF0387376f001Ee // Push the contract address
+1296: GAS                        // Push the remaining gas available onto the stack
+1297: CALL                       // Call checker function
+1298: SSTORE                     // If passed check, execute SSTORE opcode
+1299: POP						 // Pop the return value, checker's return value is stored in stack top
+1300: POP						// POP in original bytecode
+1301: POP                       // POP in original bytecode
+1302: POP                       // POP in original bytecode
+1303: JUMP                      // JUMP to the next basic block after the orginal basic block
