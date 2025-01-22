@@ -609,12 +609,6 @@ def generate_patch(input, output):
     total_offset = count_instruction_offset(instructions)
     print(f"Total Offset of Instructions: {total_offset}")
 
-    # Append call instructions
-    # updated_bytecode, new_offset = append_call_instructions(bytecode, total_offset)
-    # print(f"Updated Bytecode: {updated_bytecode}")
-    # print(f"New Jump Target Offset: {new_offset}")
-    # print(bytecode)
-    # Insert instructions before SSTORE
     modified_bytecode = insert_instructions_before_sstore(input, instructions, total_offset)
     # print(f"Modified Bytecode: {modified_bytecode}")
     with open(input, 'r') as file:
@@ -625,60 +619,3 @@ def generate_patch(input, output):
 
 if __name__ == "__main__":
     patch_examples()
-    # filename = '/Users/py/github/tmp/quick-start/examples/Audius Governance V1/logic.bin'
-    # patch_filename = '/Users/py/github/tmp/quick-start/examples/Audius Governance V1/logic_patch.bin'
-    # offsets = get_original_offset(filename)
-    # print(f"Original Offset: {offsets}")
-
-    # storage_checker_address = "1e15D309d7F266989E79E39AD7DC98F20d008C8e"
-
-
-    # instructions = [
-    #     "PUSH1 0x00",
-    #     "PUSH4 0x70e1e80a",
-    #     "PUSH1 0xe0",
-    #     "SHL",
-    #     "SWAP1",
-    #     "POP",
-    #     "PUSH1 0x40",
-    #     "MLOAD",
-    #     "DUP2",
-    #     "DUP2",
-    #     "MSTORE",
-    #     "PUSH1 0x01",
-    #     "PUSH1 0x04",
-    #     "DUP3",
-    #     "ADD",
-    #     "MSTORE",
-    #     "PUSH1 0x01",
-    #     "PUSH1 0x24",
-    #     "DUP3",
-    #     "ADD",
-    #     "MSTORE",
-    #     "GAS",
-    #     "PUSH1 0x00",
-    #     "DUP1",
-    #     "PUSH1 0x44",
-    #     "DUP5",
-    #     "PUSH1 0x00",
-    #     f"PUSH20 {storage_checker_address}",
-    #     "DUP7",
-    #     "CALL"
-    # ]
-
-    # total_offset = count_instruction_offset(instructions)
-    # print(f"Total Offset of Instructions: {total_offset}")
-
-    # # Append call instructions
-    # # updated_bytecode, new_offset = append_call_instructions(bytecode, total_offset)
-    # # print(f"Updated Bytecode: {updated_bytecode}")
-    # # print(f"New Jump Target Offset: {new_offset}")
-    # # print(bytecode)
-    # # Insert instructions before SSTORE
-    # modified_bytecode = insert_instructions_before_sstore(filename, instructions, total_offset)
-    # # print(f"Modified Bytecode: {modified_bytecode}")
-    # with open(filename, 'r') as file:
-    #     bytecode = file.read().strip()
-    # print(len(bytecode))
-    # print(len(modified_bytecode[0]))
-    # save_to_file(patch_filename, modified_bytecode[0])
