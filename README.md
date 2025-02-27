@@ -1,8 +1,33 @@
 [toc]
 
-# Debug Tracing Tool
+Artifact repo for paper "COLLISIONREPAIR: First-Aid and Automated Patching for Storage Collision Vulnerabilities in Smart Contracts"
 
-This section focuses on tools and modules designed to trace, debug, and analyze the execution of Ethereum smart contracts.
+# **Quick Start Guide**
+
+## **Overview**
+This repository contains examples from the case studies presented in our paper. The **examples folder** includes both **original** and **patched bytecode** for the following smart contracts:
+
+- **Audius Governance V1/V2**
+- **Token V1/V2**
+- **xToken V1/V2**
+- **Compound III**
+- **DerivaDEX**
+- **LoanToken**
+
+## **Setup Instructions**
+To generate patched contracts from the provided examples, follow these steps:
+
+### **1. Configure the `octopus-update` Environment**
+Ensure that your environment is properly set up for running the patching script. If `octopus-update` is not installed, follow the installation guide in the main repository.
+
+### **2. Run the Patching Script**
+Once the environment is ready, execute the following command in the terminal:
+```bash
+python3 patch_examples.py
+
+This will generate patched contracts for each example inside the related folders within the examples directory.
+
+
 
 ## EVM Trace
 
@@ -55,19 +80,6 @@ This section focuses on tools and modules designed to trace, debug, and analyze 
   - Storing micro-benchmark data for opcode-level performance analysis.
   - Maintaining macro-benchmark data for end-to-end system evaluations.
 - **Module**: `data-storage`
-
-## Quick-Start Module
-
-### Getting Started with Demo Examples
-
-- **Description**: A module to provide users with a quick-start guide and demo examples to familiarize them with the tools.
-- **Demo Example**:
-  - Deploy a demo contract using Ganache.
-  - Trace a transaction using `evm-trace`.
-  - Analyze the execution log with `octopus-update` and patch it.
-  - Redeploy and check vulnerability
- 
-  The examples from the case studies in our paper can be found in the examples folder, including the original and patched bytecode for Audius Governance V1/V2, Token V1/V2, xToken V1/V2, Compound III, DerivaDEX, and LoanToken. After configuring the octopus-update environment, running python3 patch_examples.py will generate patched contracts for each example in the related folders.
 
 ### Batch-Run Functionality
 
