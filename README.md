@@ -24,6 +24,7 @@ Ensure that your environment is properly set up for running the patching script.
 Once the environment is ready, execute the following command in the terminal:
 ```bash
 python3 patch_examples.py
+```
 
 This will generate patched contracts for each example inside the related folders within the examples directory.
 
